@@ -1,9 +1,112 @@
+import { useState } from "react";
+import { Button, ContainerButton, DivContainerText, DivFlex, DivFlexImage, Img, Title } from "../../../uiKit";
+import mainBannerImage from "../../images/main_banner 1.png";
+import camera from "../../icons/camera.svg";
+import { Input } from "./style"; // Make sure Input is a styled.input, not styled.button
+
 function Bgr() {
-    return(
-        <></>
-    )
+    const [result, setResult] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
+
+    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        setLoading(true);
+        setResult(null);
+
+        const formData = new FormData();
+        formData.append("image_file", file);
+        formData.append("size", "auto");
+
+        try {
+            const response = await fetch("https://api.remove.bg/v1.0/removebg", {
+                method: "POST",
+                headers: {
+                    "X-Api-Key": "Ww7KWdxYbBg4BuEraMLeFQfv",
+                },
+                body: formData,
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error("Erro na API: " + errorText);
+            }
+
+            const blob = await response.blob();
+            setResult(URL.createObjectURL(blob));
+        } catch (error) {
+            alert(`Erro ao remover fundo: ${error instanceof Error ? error.message : error}`);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <>
+            <DivFlex width="100%" justifycontent="center" alignitems="center">
+                <DivFlex width="1440px" paddingTotal="80px 0px" justifycontent="center" alignitems="center" gap="100px">
+                    <DivFlexImage justifycontent="center" alignitems="center">
+                        <Img src={mainBannerImage} />
+                    </DivFlexImage>
+                    <DivFlex width="499px" height="100%" justifycontent="center" alignitems="center" flexdirection="column">
+                        <DivFlexImage widthTotal="73px">
+                            <Img src={camera} />
+                        </DivFlexImage>
+                        <DivContainerText 
+                            widthTotal="100%" 
+                            alignitems="center" justifycontent="center" paddingleft="20px" 
+                            paddingtop="20px">
+                            <Title 
+                                fontsize="20px" 
+                                fontweight="400" 
+                                textalign="center" textalignmob="center">
+                                <span style={{ color: "#716FFA", fontWeight: "bold" }}>Upload </span>
+                                a sua imagem aqui!
+                            </Title>
+                        </DivContainerText>
+                        <ContainerButton justifycontent="center" alignitems="center" paddingtop="80px" flexdirection="column" gap="20px">
+                            <label htmlFor="upload-input" style={{ width: "100%" }}>
+                                <Input
+                                    as="input"
+                                    id="upload-input"
+                                    padding="10px"
+                                    alignitems="center"
+                                    justifycontent="center"
+                                    border="2px solid #716FFA"
+                                    backgroundColor="#716FFA"
+                                    hover="#716ffa9d"
+                                    borderradius="15px"
+                                    textalign="center"
+                                    fontsize="20px"
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
+                                    disabled={loading}
+                                />
+                            </label>
+                            {loading && <p>Processando...</p>}
+                            {result && (
+                                <div>
+                                    <h3>Resultado:</h3>
+                                    <img src={result} alt="Sem fundo" style={{ maxWidth: 400 }} />
+                                    <br />
+                                    <a href={result} download="imagem-sem-fundo.png">
+                                        <Button disabled={loading} padding="10px" alignitems="center" justifycontent="center" 
+                                        border="2px solid #716FFA"
+                                        backgroundColor="#716FFA"
+                                        hover="#716ffa9d"
+                                        borderradius="15px" textalign="center">Baixar imagem</Button>
+                                    </a>
+                                </div>
+                            )}
+                        </ContainerButton>
+                    </DivFlex>
+                </DivFlex>
+            </DivFlex>
+        </>
+    );
 }
 
 export default Bgr;
-
 //
