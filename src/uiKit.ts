@@ -457,6 +457,10 @@ export const ContainerButton = styled.div<ContainerButtonType>`
     gap: ${props => props.gap ? props.gap : ""};
     align-items: ${props => props.alignitems ? props.alignitems : ""};
 
+    a {
+        text-decoration: none;    
+    }
+
     @media only screen and (max-width: 580px) {
         padding-left: ${props => props.paddingleftmob ? props.paddingleftmob : ""}; 
         padding-right: ${props => props.paddingrightmob ? props.paddingrightmob : ""};   
@@ -493,7 +497,11 @@ export const Button = styled.button<ButtonType>`
     margin-bottom: ${props => props.marginbotton ? props.marginbotton : ""};
     gap: ${props => props.gap ? props.gap : ""};
     text-align: ${props => props.textalign ? props.textalign : ""};
-    cursor: pointer;    
+    cursor: pointer; 
+
+    a {
+        text-decoration: none;    
+    } 
 
     &:hover {
         background-color: ${props => props.hover ? props.hover : ""};

@@ -93,11 +93,21 @@ function Bgr() {
                                     <img src={result} alt="Sem fundo" style={{ maxWidth: 200 }} />
                                     <br />
                                     <a href={result} download="imagem-sem-fundo.png">
-                                        <Button disabled={loading} padding="10px" alignitems="center" justifycontent="center" 
-                                        border="2px solid #716FFA"
-                                        backgroundColor="#716FFA"
-                                        hover="#716ffa9d"
-                                        borderradius="15px" textalign="center">Baixar imagem</Button>
+                                        <ContainerButton justifycontent="center" alignitems="center" paddingtop="80px" flexdirection="column" gap="20px">
+                                            <Button 
+                                            disabled={loading} 
+                                            padding="10px" alignitems="center" justifycontent="center" 
+                                            border="2px solid #716FFA"
+                                            backgroundColor="#716FFA"
+                                            hover="#716ffa9d"
+                                            borderradius="15px" textalign="center"
+                                            fontsize="20px"
+                                            color="#FFFFFF"
+                                            fontweight="bold">
+                                                Baixar imagem
+                                            </Button>
+                                        </ContainerButton>
+                                        
                                     </a>
                                 </div>
                             )}
