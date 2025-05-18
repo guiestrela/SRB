@@ -1,4 +1,4 @@
-import { Button, ContainerButton, DivContainerText, DivFlex, Link, Texto, Title } from "../../../uiKit";
+import { Button, ContainerButton, DivContainerText, DivFlex, Link, Title } from "../../../uiKit";
 
 function TopBar() {
     return(
