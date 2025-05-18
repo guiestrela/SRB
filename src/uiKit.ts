@@ -166,7 +166,7 @@ interface DivContainerTextType {
 }
 
 interface ContainerButtonType {
-    flex?: number
+    flex?: string
     paddingtop?: string
     paddingbottom?: string
     justifycontent?: string
@@ -267,7 +267,7 @@ interface TitleH2Type {
     paddingtopmob?: string
 }
 
-interface TextType {
+interface TextoType {
     color?: string
     fontsize?: string
     fontfamily?: string
@@ -285,15 +285,12 @@ interface TextType {
     paddingleftmob?: string
     paddingrightmob?: string
     paddingbottommob?: string
-
 }
 
 interface ImgType {
     widthmob?: string
     heightmob?: string
 }
-
-
 
 export const DivFlex = styled.div<DivFlexType>`
     display: flex;
@@ -569,7 +566,7 @@ export const TitleH2 = styled.h2<TitleH2Type>`
     }
 `;
 
-export const Text = styled.p<TextType>`
+export const Texto = styled.p<TextoType>`
     font-family: 'Poppins', sans-serif;
     font-size: ${props => props.fontsize ? props.fontsize : '40px'};
     font-weight: ${props => props.fontweight ? props.fontweight : '600'};
