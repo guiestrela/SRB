@@ -45,8 +45,9 @@ function Bgr() {
     return (
         <>
             <DivFlex width="100%" justifycontent="center" alignitems="center">
-                <DivFlex width="1440px" paddingTotal="80px 0px" justifycontent="center" alignitems="center" gap="100px">
-                    <DivFlexImage justifycontent="center" alignitems="center">
+                <DivFlex width="1440px" paddingTotal="80px 0px" justifycontent="center" alignitems="center" gap="100px" flexdirectionmob="column">
+                    <DivFlexImage justifycontent="center" alignitems="center"
+                    paddingTotalmob="0px 20px">
                         <Img src={mainBannerImage} />
                     </DivFlexImage>
                     <DivFlex width="499px" height="100%" justifycontent="center" alignitems="center" flexdirection="column">
@@ -89,7 +90,7 @@ function Bgr() {
                             {result && (
                                 <div>
                                     <h3>Resultado:</h3>
-                                    <img src={result} alt="Sem fundo" style={{ maxWidth: 400 }} />
+                                    <img src={result} alt="Sem fundo" style={{ maxWidth: 200 }} />
                                     <br />
                                     <a href={result} download="imagem-sem-fundo.png">
                                         <Button disabled={loading} padding="10px" alignitems="center" justifycontent="center" 
