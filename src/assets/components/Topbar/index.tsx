@@ -4,10 +4,12 @@ function TopBar() {
     return(
         <>
             <DivFlex width="100%" justifycontent="center">
-                <DivFlex width="1440px" paddingTotal="40px 0px">
+                <DivFlex width="1440px" paddingTotal="20px 0px">
 
-                    <DivContainerText widthTotal="100%" alignitems="start" justifycontent="start" paddingleft="20px">
-                        <Title fontsize="30px" fontweight="400" textalign="start">
+                    <DivContainerText widthTotal="100%" alignitems="center" justifycontent="start" paddingleft="20px"
+                    >
+                        <Title fontsize="20px" fontweight="400" textalign="start"
+                        textalignmob="start">
                             Background <span style={{ color: "#716FFA", fontWeight: "bold" }}>Remover</span>
                         </Title>
                     </DivContainerText>
