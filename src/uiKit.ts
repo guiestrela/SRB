@@ -290,6 +290,29 @@ interface TextoType {
     paddingbottommob?: string
 }
 
+interface LinkType {
+    color?: string
+    fontsize?: string
+    fontfamily?: string
+    margintop?: string
+    fontweight?: string
+    textalign?: string
+    paddingtop?: string
+    paddingbottom?: string
+
+    hoverdecoration?: string
+
+
+    ///Mobile
+
+    fontsizemob?: string
+    textalignmob?: string
+    paddingtopmob?: string
+    paddingleftmob?: string
+    paddingrightmob?: string
+    paddingbottommob?: string
+}
+
 interface ImgType {
     widthmob?: string
     heightmob?: string
@@ -471,14 +494,12 @@ export const Button = styled.button<ButtonType>`
     margin-right: ${props => props.marginright ? props.marginright : ""};
     margin-bottom: ${props => props.marginbotton ? props.marginbotton : ""};
     gap: ${props => props.gap ? props.gap : ""};
-
-    cursor: pointer;
     text-align: ${props => props.textalign ? props.textalign : ""};
+    cursor: pointer;    
 
     &:hover {
         background-color: ${props => props.hover ? props.hover : ""};
     }
-    
 
     @media only screen and (max-width: 580px) {
         width: ${props => props.widthmob ? props.widthmob : ""};        
@@ -486,7 +507,6 @@ export const Button = styled.button<ButtonType>`
         justify-content: ${props => props.justifycontentmob ? props.justifycontentmob : ""};
         align-items: ${props => props.alignitemsmob ? props.alignitemsmob : ""};
         font-size: ${props => props.fontsizemob ? props.fontsizemob : ""};
-
     }
 `;
 
@@ -591,11 +611,32 @@ export const Texto = styled.p<TextoType>`
         padding-left: ${props => props.paddingleftmob ? props.paddingleftmob : ''};
         padding-right: ${props => props.paddingrightmob ? props.paddingrightmob : ''};
         padding-bottom: ${props => props.paddingbottommob ? props.paddingbottommob : ''};
-
-
-
     }
 `
+export const Link = styled.a<LinkType>`
+    text-decoration:none;
+    font-family: 'Poppins', sans-serif;
+    font-size: ${props => props.fontsize ? props.fontsize : '40px'};
+    font-weight: ${props => props.fontweight ? props.fontweight : '600'};
+    color: ${props => props.color ? props.color : ''};
+    text-align: ${props => props.textalign ? props.textalign : 'center'};
+    padding-top: ${props => props.paddingtop ? props.paddingtop : ''};
+    padding-bottom: ${props => props.paddingbottom ? props.paddingbottom : ''};
+
+    &:hover {
+        text-decoration: ${props => props.hoverdecoration ? props.hoverdecoration : 'underline'};
+    }
+
+    @media only screen and (max-width: 580px) {
+        font-size: ${props => props.fontsizemob ? props.fontsizemob : '20px'};
+        text-align: ${props => props.textalignmob ? props.textalignmob : 'center'};
+        padding-top: ${props => props.paddingtopmob ? props.paddingtopmob : ''};
+        padding-left: ${props => props.paddingleftmob ? props.paddingleftmob : ''};
+        padding-right: ${props => props.paddingrightmob ? props.paddingrightmob : ''};
+        padding-bottom: ${props => props.paddingbottommob ? props.paddingbottommob : ''};
+    }
+`;
+
 
 export const Img = styled.img<ImgType>`
     width: 100%;

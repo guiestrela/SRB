@@ -1,4 +1,4 @@
-import { Button, ContainerButton, DivContainerText, DivFlex, Texto, Title } from "../../../uiKit";
+import { Button, ContainerButton, DivContainerText, DivFlex, Link, Texto, Title } from "../../../uiKit";
 
 function TopBar() {
     return(
@@ -13,12 +13,12 @@ function TopBar() {
                     </DivContainerText>
 
                     <DivContainerText widthTotal="100%" alignitems="center" justifycontent="center" gap="50px">
-                        <Texto fontsize="20px" fontweight="400" textalign="start">
+                        <Link fontsize="20px" fontweight="400" textalign="start">
                             Como usar
-                        </Texto>
-                        <Texto fontsize="20px" fontweight="400" textalign="start">
+                        </Link>
+                        <Link fontsize="20px" fontweight="400" textalign="start">
                             Contato
-                        </Texto>
+                        </Link>
                     </DivContainerText>
 
                     <ContainerButton width="100%" justifycontent="end" alignitems="center" gap="20px" paddingright="20px">
