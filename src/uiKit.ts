@@ -26,6 +26,8 @@ interface DivFlexType {
     marginleft?: string
     marginright?: string
     marginbottom?: string
+    borser?: string
+
 
 
     ///Mobile
@@ -344,6 +346,9 @@ export const DivFlex = styled.div<DivFlexType>`
     margin-left: ${props => props.marginleft ? props.marginleft : ""};
     margin-right: ${props => props.marginright ? props.marginright : ""};
     margin-bottom: ${props => props.marginbottom ? props.marginbottom : ""};
+
+    border: ${props => props.border ? props.border : ""};
+    
 
     @media only screen and (max-width: 580px) {
         width: 100%;

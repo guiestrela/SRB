@@ -50,8 +50,8 @@ function Bgr() {
                     paddingTotalmob="0px 20px">
                         <Img src={mainBannerImage} />
                     </DivFlexImage>
-                    <DivFlex width="499px" height="100%" justifycontent="center" alignitems="center" flexdirection="column">
-                        <DivFlexImage widthTotal="73px">
+                    <DivFlex width="499px" height="100%" justifycontent="center" alignitems="center" flexdirection="column" border="dashed 2px black">
+                        <DivFlexImage widthTotal="73px" paddingtop="26px">
                             <Img src={camera} />
                         </DivFlexImage>
                         <DivContainerText 
@@ -66,7 +66,8 @@ function Bgr() {
                                 a sua imagem aqui!
                             </Title>
                         </DivContainerText>
-                        <ContainerButton justifycontent="center" alignitems="center" paddingtop="80px" flexdirection="column" gap="20px">
+                        <ContainerButton justifycontent="center" alignitems="center" paddingtop="80px" flexdirection="column" gap="20px"
+                        paddingbottom="26px">
                             <label htmlFor="upload-input" style={{ width: "100%" }}>
                                 <Input
                                     as="input"
