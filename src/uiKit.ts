@@ -220,6 +220,9 @@ interface ButtonType {
 
     //
 
+    hover?: string
+
+
     //mobile
 
     widthmob?: string
@@ -471,6 +474,11 @@ export const Button = styled.button<ButtonType>`
 
     cursor: pointer;
     text-align: ${props => props.textalign ? props.textalign : ""};
+
+    &:hover {
+        background-color: ${props => props.hover ? props.hover : ""};
+    }
+    
 
     @media only screen and (max-width: 580px) {
         width: ${props => props.widthmob ? props.widthmob : ""};        

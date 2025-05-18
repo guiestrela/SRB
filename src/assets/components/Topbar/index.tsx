@@ -23,12 +23,15 @@ function TopBar() {
 
                     <ContainerButton width="100%" justifycontent="end" alignitems="center" gap="20px" paddingright="20px">
                         <Button padding="10px" alignitems="center" justifycontent="center"
-                        borderradius="15px">
+                        border="0px solid transparent"
+                        backgroundColor="transparent"
+                        borderradius="15px" hover="#716FFA">
                             Login
                         </Button>
                         <Button padding="10px" alignitems="center" justifycontent="center" 
                         border="2px solid #716FFA"
-                        
+                        backgroundColor="#716FFA"
+                        hover="#716ffa9d"
                         borderradius="15px" textalign="center">
                             Sign-Up
                         </Button>
