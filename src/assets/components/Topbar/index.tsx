@@ -13,19 +13,23 @@ function TopBar() {
                     </DivContainerText>
 
                     <DivContainerText widthTotal="100%" alignitems="center" justifycontent="center" gap="50px">
-                        <Texto fontsize="30px" fontweight="400" textalign="start">
+                        <Texto fontsize="20px" fontweight="400" textalign="start">
                             Como usar
                         </Texto>
-                        <Texto fontsize="30px" fontweight="400" textalign="start">
+                        <Texto fontsize="20px" fontweight="400" textalign="start">
                             Contato
                         </Texto>
                     </DivContainerText>
 
                     <ContainerButton width="100%" justifycontent="end" alignitems="center" gap="20px" paddingright="20px">
-                        <Button padding="10px" alignitems="center" justifycontent="center" borderradius="15px">
+                        <Button padding="10px" alignitems="center" justifycontent="center"
+                        borderradius="15px">
                             Login
                         </Button>
-                        <Button padding="10px" alignitems="center" justifycontent="center" borderradius="15px" textalign="center">
+                        <Button padding="10px" alignitems="center" justifycontent="center" 
+                        border="2px solid #716FFA"
+                        
+                        borderradius="15px" textalign="center">
                             Sign-Up
                         </Button>
                     </ContainerButton>
