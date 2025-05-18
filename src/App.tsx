@@ -1,4 +1,5 @@
 import Banner from "./assets/components/Banner"
+import Bgr from "./assets/components/Bgr"
 import TopBar from "./assets/components/Topbar"
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
     <>
       <TopBar />
       <Banner />
+      <Bgr />
     </>
   )
 }
