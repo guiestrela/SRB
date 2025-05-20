@@ -9,7 +9,7 @@ function TextInfo() {
                 alignitems="center">
                 <DivFlex 
                     width="1440px"  
-                    paddingTotal="80px 0px"
+                    paddingTotal="20px 0px"
                     backgroundColor="#c9c6f0"
                     flexdirectionmob="column"
                     alignitemsmob="center"
@@ -18,15 +18,15 @@ function TextInfo() {
                     <DivContainerText 
                         widthTotal="100%" 
                         alignitems="center" 
-                        justifycontent="start" 
+                        justifycontent="center" 
                         paddingleft="20px"
                         justifycontentmob="center">
                         <Texto 
-                            fontsize="30px"     
-                            fontweight="400" 
-                            textalign="start"
-                            textalignmob="start">
-                            Background <span style={{ color: "#716FFA", fontWeight: "bold" }}>Remover</span>
+                            fontsize="20px"     
+                            fontweight="500" 
+                            textalign="center"
+                            textalignmob="center">
+                            @2025 - Projeto em desenvolvimento
                         </Texto>
                     </DivContainerText>
                 </DivFlex>

@@ -29,7 +29,8 @@ function Footer() {
                             fontsize="30px"     
                             fontweight="400" 
                             textalign="start"
-                            textalignmob="start">
+                            textalignmob="start"
+                            fontsizemob="30px">
                             Background <span style={{ color: "#716FFA", fontWeight: "bold" }}>Remover</span>
                         </Title>
                     </DivContainerText>
