@@ -27,6 +27,11 @@ interface DivFlexType {
     marginright?: string
     marginbottom?: string
     borser?: string
+    bordertop?: string
+    borderright?: string
+    borderbottom?: string
+    borderleft?: string
+
 
 
 
@@ -348,6 +353,10 @@ export const DivFlex = styled.div<DivFlexType>`
     margin-bottom: ${props => props.marginbottom ? props.marginbottom : ""};
 
     border: ${props => props.border ? props.border : ""};
+    border-top: ${props => props.bordertop ? props.bordertop : ""};
+    border-right: ${props => props.borderright ? props.borderright : ""};
+    border-bottom: ${props => props.borderbottom ? props.borderbottom : ""};
+
     
 
     @media only screen and (max-width: 580px) {

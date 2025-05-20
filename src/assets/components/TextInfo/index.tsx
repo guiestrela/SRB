@@ -6,14 +6,16 @@ function TextInfo() {
             <DivFlex 
                 width="100%" 
                 justifycontent="center"               
-                alignitems="center">
+                alignitems="center"
+                >
                 <DivFlex 
                     width="1440px"  
-                    paddingTotal="20px 0px"
+                    paddingTotal="10px 0px"
                     backgroundColor="#c9c6f0"
                     flexdirectionmob="column"
                     alignitemsmob="center"
-                    justifycontentmob="center">
+                    justifycontentmob="center"
+                    bordertop="2px solid #FFFFFF">
 
                     <DivContainerText 
                         widthTotal="100%" 
