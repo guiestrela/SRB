@@ -90,7 +90,7 @@ function Bgr() {
                                     borderradius="15px"
                                     textalign="center"
                                     fontsize="20px"
-                                    fontsizemob="16px"
+                                    fontsizemob="10px"
                                     type="file"
                                     accept="image/*"
                                     onChange={handleFileChange}
