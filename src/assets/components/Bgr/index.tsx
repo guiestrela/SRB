@@ -50,8 +50,17 @@ function Bgr() {
                     paddingTotalmob="0px 20px">
                         <Img src={mainBannerImage} />
                     </DivFlexImage>
-                    <DivFlex width="499px" height="100%" justifycontent="center" alignitems="center" flexdirection="column" border="dashed 2px black">
-                        <DivFlexImage widthTotal="73px" paddingtop="26px">
+                    <DivFlex 
+                        width="499px" 
+                        height="100%" 
+                        justifycontent="center" alignitems="center" 
+                        flexdirection="column" 
+                        border="dashed 2px black">
+                        <DivFlexImage 
+                            justifycontent="center" alignitems="center" 
+                            widthTotal="73px" 
+                            paddingtop="26px" 
+                            widthmob="70px">
                             <Img src={camera} />
                         </DivFlexImage>
                         <DivContainerText 
@@ -81,6 +90,7 @@ function Bgr() {
                                     borderradius="15px"
                                     textalign="center"
                                     fontsize="20px"
+                                    fontsizemob="16px"
                                     type="file"
                                     accept="image/*"
                                     onChange={handleFileChange}
