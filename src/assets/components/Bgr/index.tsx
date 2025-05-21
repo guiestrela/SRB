@@ -135,7 +135,8 @@ function Bgr() {
                                     <DivFlexImage 
                                         justifycontent="center" 
                                         alignitems="center" 
-                                        widthTotal="200px"
+                                        widthTotal= "300px"
+                                        widthmob="180px"
                                         >
                                         <Img src={result} alt="Sem fundo" />       
                                     </DivFlexImage>                                                                 
