@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, ContainerButton, DivContainerText, DivFlex, DivFlexImage, Img, Title } from "../../../uiKit";
+import { Button, ContainerButton, DivContainerText, DivFlex, DivFlexImage, Img, Link, Title } from "../../../uiKit";
 import mainBannerImage from "../../images/main_banner 1.png";
 import camera from "../../icons/camera.svg";
 import { Input } from "./style"; // Make sure Input is a styled.input, not styled.button
@@ -40,14 +40,26 @@ function Bgr() {
         } finally {
             setLoading(false);
         }
-    };
+    };   
+
 
     return (
         <>
-            <DivFlex width="100%" justifycontent="center" alignitems="center">
-                <DivFlex width="1440px" paddingTotal="80px 0px" justifycontent="center" alignitems="center" gap="100px" flexdirectionmob="column">
-                    <DivFlexImage justifycontent="center" alignitems="center"
-                    paddingTotalmob="0px 20px">
+            <DivFlex 
+                    width="100%" 
+                    justifycontent="center" 
+                    alignitems="center">
+                <DivFlex 
+                    width="1440px" 
+                    paddingTotal="80px 0px" 
+                    justifycontent="center" 
+                    alignitems="center" 
+                    gap="100px" 
+                    flexdirectionmob="column">                    
+                    <DivFlexImage 
+                        justifycontent="center" 
+                        alignitems="center"
+                        paddingTotalmob="0px 20px">
                         <Img src={mainBannerImage} />
                     </DivFlexImage>
                     <DivFlex 
@@ -62,7 +74,7 @@ function Bgr() {
                             paddingtop="26px" 
                             widthmob="70px">
                             <Img src={camera} />
-                        </DivFlexImage>
+                        </DivFlexImage>                        
                         <DivContainerText 
                             widthTotal="100%" 
                             alignitems="center" justifycontent="center" paddingleft="20px" 
@@ -70,13 +82,28 @@ function Bgr() {
                             <Title 
                                 fontsize="20px" 
                                 fontweight="400" 
-                                textalign="center" textalignmob="center">
-                                <span style={{ color: "#716FFA", fontWeight: "bold" }}>Upload </span>
-                                a sua imagem aqui!
+                                textalign="center" 
+                                textalignmob="center">
+                                {!result ? (
+                                    <>
+                                        <span style={{ color: "#716FFA", fontWeight: "bold" }}>Upload </span>
+                                        a sua imagem aqui!
+                                    </>
+                                ) : (
+                                    <>
+                                        Sua imagem está <span style={{ color: "#716FFA", fontWeight: "bold" }}> pronta</span>
+                                    </>                                    
+                                )}
                             </Title>
                         </DivContainerText>
-                        <ContainerButton justifycontent="center" alignitems="center" paddingtop="80px" flexdirection="column" gap="20px"
-                        paddingbottom="26px">
+                        <ContainerButton 
+                            justifycontent="center" 
+                            alignitems="center"
+                            paddingtop={!result ? "80px" : "20px"}                             
+                            flexdirection="column" 
+                            gap="20px"
+                            paddingbottom="26px">                          
+                            {!loading && !result && (
                             <label htmlFor="upload-input" style={{ width: "100%" }}>
                                 <Input
                                     as="input"
@@ -97,30 +124,43 @@ function Bgr() {
                                     disabled={loading}
                                 />
                             </label>
+                            )}
                             {loading && <p>Processando...</p>}
                             {result && (
-                                <div>
-                                    <h3>Resultado:</h3>
-                                    <img src={result} alt="Sem fundo" style={{ maxWidth: 200 }} />
-                                    <br />
-                                    <a href={result} download="imagem-sem-fundo.png">
-                                        <ContainerButton justifycontent="center" alignitems="center" paddingtop="80px" flexdirection="column" gap="20px">
+                                <DivFlex 
+                                    width="100%" 
+                                    justifycontent="center" 
+                                    alignitems="center" 
+                                    flexdirection="column">
+                                    <DivFlexImage 
+                                        justifycontent="center" 
+                                        alignitems="center" 
+                                        widthTotal="200px"
+                                        >
+                                        <Img src={result} alt="Sem fundo" />       
+                                    </DivFlexImage>                                                                 
+                                    <Link href={result} download="imagem-sem-fundo.png">
+                                        <ContainerButton 
+                                            justifycontent="center" 
+                                            alignitems="center" 
+                                            paddingtop="20px" 
+                                            flexdirection="column" 
+                                            gap="20px">
                                             <Button 
-                                            disabled={loading} 
-                                            padding="10px" alignitems="center" justifycontent="center" 
-                                            border="2px solid #716FFA"
-                                            backgroundColor="#716FFA"
-                                            hover="#716ffa9d"
-                                            borderradius="15px" textalign="center"
-                                            fontsize="20px"
-                                            color="#FFFFFF"
-                                            fontweight="bold">
-                                                Baixar imagem
+                                                disabled={loading} 
+                                                padding="10px" alignitems="center" justifycontent="center" 
+                                                border="2px solid #716FFA"
+                                                backgroundColor="#716FFA"
+                                                hover="#716ffa9d"
+                                                borderradius="15px" textalign="center"
+                                                fontsize="20px"
+                                                color="#FFFFFF"
+                                                fontweight="bold">
+                                                    Baixar imagem
                                             </Button>
                                         </ContainerButton>
-                                        
-                                    </a>
-                                </div>
+                                    </Link>
+                                </DivFlex>
                             )}
                         </ContainerButton>
                     </DivFlex>
