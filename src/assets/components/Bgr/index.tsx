@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { Button, ContainerButton, DivContainerText, DivFlex, DivFlexImage, Img, Link, Title } from "../../../uiKit";
+import { 
+    Button, 
+    ContainerButton, 
+    DivContainerText, 
+    DivFlex, 
+    DivFlexImage, 
+    Img, 
+    Link, 
+    Title }
+    from "../../../uiKit";
 import mainBannerImage from "../../images/main_banner 1.png";
 import camera from "../../icons/camera.svg";
 import { Input } from "./style"; // Make sure Input is a styled.input, not styled.button
@@ -42,7 +51,6 @@ function Bgr() {
         }
     };   
 
-
     return (
         <>
             <DivFlex 
@@ -65,11 +73,13 @@ function Bgr() {
                     <DivFlex 
                         width="499px" 
                         height="100%" 
-                        justifycontent="center" alignitems="center" 
+                        justifycontent="center" 
+                        alignitems="center" 
                         flexdirection="column" 
                         border="dashed 2px black">
                         <DivFlexImage 
-                            justifycontent="center" alignitems="center" 
+                            justifycontent="center" 
+                            alignitems="center" 
                             widthTotal="73px" 
                             paddingtop="26px" 
                             widthmob="70px">
@@ -77,7 +87,9 @@ function Bgr() {
                         </DivFlexImage>                        
                         <DivContainerText 
                             widthTotal="100%" 
-                            alignitems="center" justifycontent="center" paddingleft="20px" 
+                            alignitems="center" 
+                            justifycontent="center" 
+                            paddingleft="20px" 
                             paddingtop="20px">
                             <Title 
                                 fontsize="20px" 

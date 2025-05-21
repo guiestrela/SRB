@@ -1,4 +1,11 @@
-import { DivContainerText, DivFlex, DivFlexLogo, Img, Link, Title } from "../../../uiKit";
+import { 
+    DivContainerText, 
+    DivFlex, 
+    DivFlexLogo, 
+    Img, 
+    Link, 
+    Title } 
+    from "../../../uiKit";
 
 import github from "../../icons/github.svg"
 import linkedin from "../../icons/linkedin.svg"
@@ -39,16 +46,20 @@ function Footer() {
                         alignitemsmob="center"
                         paddingtopmob="30px">
                         <DivFlexLogo 
-                        widthTotal="50px" 
-                        paddingright="20px"
-                        widthmob="50px">
-                            <Link href="https://github.com/guiestrela" target="_blank"><Img src={github} alt="github"/> </Link>   
+                            widthTotal="50px" 
+                            paddingright="20px"
+                            widthmob="50px">
+                            <Link href="https://github.com/guiestrela" target="_blank">
+                            <Img src={github} alt="github"/> 
+                            </Link>   
                         </DivFlexLogo>   
                         <DivFlexLogo 
-                        widthTotal="50px" 
-                        paddingright="20px"
-                        widthmob="50px">
-                            <Link href="https://www.linkedin.com/in/guilherme-estrela-4166a539/" target="_blank"><Img src={linkedin} alt="linkedin"/></Link>     
+                            widthTotal="50px" 
+                            paddingright="20px"
+                            widthmob="50px">
+                            <Link href="https://www.linkedin.com/in/guilherme-estrela-4166a539/" target="_blank">
+                            <Img src={linkedin} alt="linkedin"/>
+                            </Link>     
                         </DivFlexLogo>       
                     </DivFlex>                                    
                 </DivFlex>
