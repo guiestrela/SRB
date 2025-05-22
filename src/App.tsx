@@ -10,8 +10,7 @@ function App() {
     <>
       <TopBar />
       <Banner />
-      <Bgr />
-      
+      <Bgr />      
       <Banner2 />
       <Footer />
       <TextInfo />
