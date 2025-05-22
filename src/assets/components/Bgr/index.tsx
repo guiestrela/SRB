@@ -60,11 +60,13 @@ function Bgr() {
                     alignitems="center">
                 <DivFlex 
                     width="1440px" 
-                    paddingTotal="80px 0px" 
+                    paddingTotal="80px 80px" 
                     justifycontent="center" 
                     alignitems="center" 
                     gap="100px" 
-                    flexdirectionmob="column">                    
+                    flexdirectionmob="column"
+                    paddingTotalmob="40px 20px"
+                    gapmob="60px">                    
                     <DivFlexImage 
                         justifycontent="center" 
                         alignitems="center"

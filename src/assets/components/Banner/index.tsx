@@ -16,7 +16,8 @@ function Banner() {
                     width="1440px" 
                     paddingTotal="80px 0px" 
                     justifycontent="center" 
-                    alignitems="center">            
+                    alignitems="center"
+                    paddingTotalmob="55px 0px">            
                     <DivContainerText 
                         widthTotal="80%" 
                         widthmob="100%" 
