@@ -1,4 +1,8 @@
-import { DivContainerText, DivFlex, Texto } from "../../../uiKit";
+import { 
+    DivContainerText, 
+    DivFlex, 
+    Texto } 
+    from "../../../uiKit";
 
 function TextInfo() {
     return(
