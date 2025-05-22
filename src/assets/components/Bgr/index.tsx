@@ -9,6 +9,7 @@ import {
     Link, 
     Title }
     from "../../../uiKit";
+    
 import mainBannerImage from "../../images/main_banner 1.png";
 import camera from "../../icons/camera.svg";
 import { Input } from "./style"; // Make sure Input is a styled.input, not styled.button
