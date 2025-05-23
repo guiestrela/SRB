@@ -49,7 +49,7 @@ https://srb-psi.vercel.app/
 ## 📄 Observações
 
 * Este projeto foi criado com o objetivo principal de demonstrar minhas habilidades técnicas em um cenário prático.
-* O design(Baseado): [https://www.figma.com/design/mpkspNNfnVwruwqGzAm3UW/P%C3%A3o-Com-Ovo?node-id=0-1&p=f&t=1SBUUm1hv5dxopbK-0](https://www.figma.com/design/LxwfjNNaTAwuiYmeVmEmDz/Background-remover--Community-?node-id=1-2&t=iS4BjGkd9lxXBvyb-0)
+* O design(Baseado): [https://www.figma.com/design/LxwfjNNaTAwuiYmeVmEmDz/Background-remover--Community-?node-id=1-2&t=iS4BjGkd9lxXBvyb-0](https://www.figma.com/design/LxwfjNNaTAwuiYmeVmEmDz/Background-remover--Community-?node-id=1-2&t=iS4BjGkd9lxXBvyb-0)
 * API RemoveBg: [https://www.remove.bg/a/api-docs](https://www.remove.bg/a/api-docs)
   
 ## 👨‍💻 Sobre Mim
