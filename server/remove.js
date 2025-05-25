@@ -1,0 +1,40 @@
+const express = require("express");
+const fetch = require("node-fetch");
+const multer = require("multer");
+const FormData = require("form-data");
+const cors = require("cors");
+
+const app = express();
+const upload = multer();
+app.use(cors());
+
+const API_KEY = "3B5aj2hNsKU97SaWiWoBDuDA"; // Fica seguro aqui
+
+app.post("/api/removebg", upload.single("image_file"), async (req, res) => {
+    const formData = new FormData();
+    formData.append("image_file", req.file.buffer, req.file.originalname);
+    formData.append("size", "auto");
+
+    try {
+        const response = await fetch("https://api.remove.bg/v1.0/removebg", {
+            method: "POST",
+            headers: {
+                "X-Api-Key": API_KEY,
+            },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            return res.status(400).send(errorText);
+        }
+
+        const buffer = await response.buffer();
+        res.set("Content-Type", "image/png");
+        res.send(buffer);
+    } catch (err) {
+        res.status(500).send("Erro interno");
+    }
+});
+
+app.listen(5000, () => console.log("Backend rodando na porta 5000"));

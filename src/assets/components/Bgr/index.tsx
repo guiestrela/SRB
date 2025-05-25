@@ -19,42 +19,35 @@ function Bgr() {
     const [result, setResult] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
-    const API_KEY = "3B5aj2hNsKU97SaWiWoBDuDA";
-
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
+    const file = e.target.files?.[0];
+    if (!file) return;
 
-        setLoading(true);
-        setResult(null);
+    setLoading(true);
+    setResult(null);
 
-        const formData = new FormData();
-        formData.append("image_file", file);
-        formData.append("size", "auto");
+    const formData = new FormData();
+    formData.append("image_file", file);
 
-        try {
-            const response = await fetch("https://api.remove.bg/v1.0/removebg", {
-                method: "POST",
-                headers: {
-                    "X-Api-Key": API_KEY,
-                },
-                body: formData,
-            });
+    try {
+        const response = await fetch("http://localhost:5000/api/removebg", {
+            method: "POST",
+            body: formData,
+        });
 
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error("Erro na API: " + errorText);
-            }
-
-            const blob = await response.blob();
-            setResult(URL.createObjectURL(blob));
-        } catch (error) {
-            alert(`Erro ao remover fundo: ${error instanceof Error ? error.message : error}`);
-        } finally {
-            setLoading(false);
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error("Erro na API: " + errorText);
         }
-    };   
 
+        const blob = await response.blob();
+        setResult(URL.createObjectURL(blob));
+    } catch (error) {
+        alert(`Erro ao remover fundo: ${error instanceof Error ? error.message : error}`);
+    } finally {
+        setLoading(false);
+    }
+    };
     return (
         <>
             <DivFlex 
