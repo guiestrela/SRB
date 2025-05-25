@@ -14,6 +14,9 @@ import mainBannerImage from "../../images/main_banner 1.png";
 import camera from "../../icons/camera.svg";
 import { Input } from "./style"; // Make sure Input is a styled.input, not styled.button
 
+const API_KEY = "3B5aj2hNsKU97SaWiWoBDuDA";
+
+
 function Bgr() {
     const [result, setResult] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
@@ -33,7 +36,7 @@ function Bgr() {
             const response = await fetch("https://api.remove.bg/v1.0/removebg", {
                 method: "POST",
                 headers: {
-                    "X-Api-Key": "Ww7KWdxYbBg4BuEraMLeFQfv",
+                    "X-Api-Key": API_KEY,
                 },
                 body: formData,
             });
