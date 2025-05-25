@@ -14,12 +14,12 @@ import mainBannerImage from "../../images/main_banner 1.png";
 import camera from "../../icons/camera.svg";
 import { Input } from "./style"; // Make sure Input is a styled.input, not styled.button
 
-const API_KEY = "3B5aj2hNsKU97SaWiWoBDuDA";
-
 
 function Bgr() {
     const [result, setResult] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
+
+    const API_KEY = "3B5aj2hNsKU97SaWiWoBDuDA";
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
