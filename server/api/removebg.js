@@ -1,16 +1,18 @@
-import express from "express";
-import fetch from "node-fetch";
 import multer from "multer";
 import FormData from "form-data";
-import cors from "cors";
+import fetch from "node-fetch";
 
-const app = express();
 const upload = multer();
-app.use(cors());
 
-const API_KEY = "3B5aj2hNsKU97SaWiWoBDuDA"; // Fica seguro aqui
+export default async function handler(req, res) {
+    await new Promise((resolve, reject) => {
+        upload.single("image_file")(req, res, (err) => {
+            if (err) reject(err);
+            else resolve();
+        });
+    });
 
-app.post("/api/removebg", upload.single("image_file"), async (req, res) => {
+    const API_KEY = "3B5aj2hNsKU97SaWiWoBDuDA";
     const formData = new FormData();
     formData.append("image_file", req.file.buffer, req.file.originalname);
     formData.append("size", "auto");
@@ -18,9 +20,7 @@ app.post("/api/removebg", upload.single("image_file"), async (req, res) => {
     try {
         const response = await fetch("https://api.remove.bg/v1.0/removebg", {
             method: "POST",
-            headers: {
-                "X-Api-Key": API_KEY,
-            },
+            headers: { "X-Api-Key": API_KEY },
             body: formData,
         });
 
@@ -30,11 +30,9 @@ app.post("/api/removebg", upload.single("image_file"), async (req, res) => {
         }
 
         const buffer = await response.buffer();
-        res.set("Content-Type", "image/png");
+        res.setHeader("Content-Type", "image/png");
         res.send(buffer);
     } catch (err) {
         res.status(500).send("Erro interno");
     }
-});
-
-app.listen(5000, () => console.log("Backend rodando na porta 5000"));
+}
