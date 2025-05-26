@@ -1,30 +1,58 @@
-// api/removebg.js
+import Busboy from "busboy";
+import FormData from "form-data";
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export default async function handler(req, res) {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    if (req.method !== "POST") {
-        res.status(405).send("Method Not Allowed");
-        return;
-    }
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  if (req.method !== "POST") {
+    res.status(405).send("Method Not Allowed");
+    return;
+  }
 
-    const formData = new FormData();
-    const buffers = [];
-    req.on("data", chunk => buffers.push(chunk));
-    req.on("end", async () => {
-        formData.append("image_file", Buffer.concat(buffers), "image.png");
-        formData.append("size", "auto");
+  const busboy = Busboy({ headers: req.headers });
+  let fileBuffer = Buffer.alloc(0);
+  let fileName = "image.png";
 
+  await new Promise((resolve, reject) => {
+    busboy.on("file", (fieldname, file, info) => {
+      fileName = info.filename || "image.png";
+      file.on("data", (data) => {
+        fileBuffer = Buffer.concat([fileBuffer, data]);
+      });
+      file.on("end", resolve);
+    });
+    busboy.on("error", reject);
+    req.pipe(busboy);
+  });
+
+  const formData = new FormData();
+  formData.append("image_file", fileBuffer, fileName);
+  formData.append("size", "auto");
+
+  try {
     const response = await fetch("https://api.remove.bg/v1.0/removebg", {
-        method: "POST",
-        headers: { "X-Api-Key": process.env.REMOVE_BG_KEY, ...formData.getHeaders() },
-        body: formData,
+      method: "POST",
+      headers: {
+        "X-Api-Key": process.env.REMOVE_BG_KEY,
+        ...formData.getHeaders(),
+      },
+      body: formData,
     });
 
     if (!response.ok) {
-        const errorText = await response.text();
-        return res.status(400).send(errorText);
+      const errorText = await response.text();
+      return res.status(400).send(errorText);
     }
+
     const buffer = Buffer.from(await response.arrayBuffer());
     res.setHeader("Content-Type", "image/png");
     res.send(buffer);
-});
+  } catch (err) {
+    res.status(500).send("Erro interno");
+  }
 }
