@@ -19,6 +19,8 @@ function Bgr() {
     const [result, setResult] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
+    const API_KEY = "68H8bJoimFogKoJ9667rcy9R"; // Coloque sua chave aqui
+
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -28,12 +30,16 @@ function Bgr() {
 
     const formData = new FormData();
     formData.append("image_file", file);
+    formData.append("size", "auto");
 
     try {
-        const response = await fetch("https://api-remove-bg-eight.vercel.app/api/removebg", {
-        method: "POST",
-        body: formData,
-    });
+        const response = await fetch("https://api.remove.bg/v1.0/removebg", {
+            method: "POST",
+            headers: {
+                "X-Api-Key": API_KEY // Coloque sua chave aqui
+            },
+            body: formData,
+        });
 
         if (!response.ok) {
             const errorText = await response.text();
