@@ -30,7 +30,7 @@ function Bgr() {
     formData.append("image_file", file);
 
     try {
-        const response = await fetch("https://api-remove-bg-eight.vercel.app/api", {
+        const response = await fetch("https://api-remove-bg-eight.vercel.app/api/removebg", {
             method: "POST",
             body: formData,
         });
