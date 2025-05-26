@@ -23,7 +23,7 @@ export const config = {
             fileBuffer = Buffer.concat([fileBuffer, data]);
         });
         });
-        busboy.on("finish", resolve); // <-- aqui!
+        busboy.on("finish", resolve);
         busboy.on("error", reject);
         req.pipe(busboy);
     });
@@ -32,17 +32,12 @@ export const config = {
         return res.status(400).json({ error: "Nenhum arquivo recebido." });
     }
 
-    // Limite de tamanho extra (opcional)
-    if (fileBuffer.length > 4 * 1024 * 1024) {
-        return res.status(413).json({ error: "Arquivo muito grande (máx 4MB)" });
-    }
-
-    const formData = new FormData();
     const ext = fileName.split('.').pop();
     const mimeType = ext === "jpg" || ext === "jpeg" ? "image/jpeg" : "image/png";
+    const formData = new FormData();
     formData.append("image_file", fileBuffer, {
         filename: fileName,
-        contentType: mimeType
+        contentType: mimeType,
     });
     formData.append("size", "auto");
 
