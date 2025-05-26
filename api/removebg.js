@@ -44,14 +44,33 @@ export const config = {
         return res.status(400).json({ error: "Nenhum arquivo recebido." });
     }
 
-    // The old manual mimeType derivation is no longer needed.
-    // const ext = fileName.split('.').pop().toLowerCase();
-    // ... (old logic was here)
+    let finalMimeType = originalMimeType; // This is info.mimeType || "application/octet-stream"
+
+    // If originalMimeType is generic or potentially unreliable (e.g. client didn't send one),
+    // try to infer a more specific MIME type from the filename for supported image types.
+    if (originalMimeType === "application/octet-stream" || !originalMimeType) {
+        const ext = fileName.split('.').pop().toLowerCase();
+        if (ext === "jpg" || ext === "jpeg") {
+            finalMimeType = "image/jpeg";
+        } else if (ext === "png") {
+            finalMimeType = "image/png";
+        } else if (ext === "webp") {
+            finalMimeType = "image/webp";
+        } else if (ext === "bmp") {
+            finalMimeType = "image/bmp";
+        } else if (ext === "tiff" || ext === "tif") {
+            finalMimeType = "image/tiff";
+        }
+        // If extension doesn't match known types, finalMimeType remains as it was (e.g., application/octet-stream)
+    }
+
+    // Log what's being used for the API call
+    console.log(`Preparing to send to remove.bg: filename='${fileName}', clientMimeType='${originalMimeType}', finalMimeTypeForAPI='${finalMimeType}', bufferLength=${fileBuffer.length}`);
 
     const formData = new FormData();
     formData.append("image_file", fileBuffer, {
         filename: fileName,
-        contentType: originalMimeType, // Use the captured original mimeType
+        contentType: finalMimeType, // Use the refined MIME type
     });
     formData.append("size", "auto");
 
