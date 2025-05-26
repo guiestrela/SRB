@@ -183,4 +183,4 @@ function Bgr() {
 }
 
 export default Bgr;
-//
+//# sourceMappingURL=Bgr.tsx.map
