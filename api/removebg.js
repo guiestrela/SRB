@@ -79,7 +79,6 @@ export const config = {
         method: "POST",
         headers: {
             "X-Api-Key": process.env.REMOVE_BG_KEY,
-            ...formData.getHeaders(),
         },
         body: formData,
         });
