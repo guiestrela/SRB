@@ -22,8 +22,8 @@ export const config = {
         file.on("data", (data) => {
             fileBuffer = Buffer.concat([fileBuffer, data]);
         });
+        file.on("end", resolve);
         });
-        busboy.on("finish", resolve);
         busboy.on("error", reject);
         req.pipe(busboy);
     });
