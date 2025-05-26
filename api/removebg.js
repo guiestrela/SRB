@@ -38,7 +38,12 @@ export const config = {
     }
 
     const formData = new FormData();
-    formData.append("image_file", fileBuffer, fileName);
+    const ext = fileName.split('.').pop();
+    const mimeType = ext === "jpg" || ext === "jpeg" ? "image/jpeg" : "image/png";
+    formData.append("image_file", fileBuffer, {
+        filename: fileName,
+        contentType: mimeType
+    });
     formData.append("size", "auto");
 
     try {
