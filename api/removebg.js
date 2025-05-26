@@ -15,38 +15,43 @@ export const config = {
     const busboy = Busboy({ headers: req.headers });
     let fileBuffer = Buffer.alloc(0);
     let fileName = "image.png";
+    let originalMimeType = "application/octet-stream"; // To store the original mime type
 
-    await new Promise((resolve, reject) => {
-        busboy.on("file", (fieldname, file, info) => {
-        fileName = info.filename || "image.png";
-        file.on("data", (data) => {
-            fileBuffer = Buffer.concat([fileBuffer, data]);
+    try {
+        await new Promise((resolve, reject) => {
+            busboy.on("file", (fieldname, file, info) => {
+                fileName = info.filename || "image.png";
+                originalMimeType = info.mimeType || "application/octet-stream"; // Capture original mimeType
+
+                file.on("data", (data) => {
+                    fileBuffer = Buffer.concat([fileBuffer, data]);
+                });
+                // No specific action on file 'end' if 'finish' resolves the promise.
+                file.on("error", reject); // Reject promise if a file stream errors
+            });
+
+            busboy.on("error", reject); // Reject promise on busboy errors
+            busboy.on("finish", resolve); // Resolve promise when all parts are parsed
+
+            req.pipe(busboy);
         });
-        file.on("end", resolve);
-        });
-        busboy.on("error", reject);
-        req.pipe(busboy);
-    });
+    } catch (uploadError) {
+        console.error("Error during file upload processing with Busboy:", uploadError);
+        return res.status(400).json({ error: "Erro ao processar o arquivo enviado.", details: uploadError.message });
+    }
 
     if (!fileBuffer.length) {
         return res.status(400).json({ error: "Nenhum arquivo recebido." });
     }
 
-    const ext = fileName.split('.').pop().toLowerCase();
-    let mimeType;
-    if (ext === "jpg" || ext === "jpeg") {
-        mimeType = "image/jpeg";
-    } else if (ext === "png") {
-        mimeType = "image/png";
-    } else if (ext === "webp") {
-        mimeType = "image/webp";
-    } else {
-        mimeType = "application/octet-stream";
-    }
+    // The old manual mimeType derivation is no longer needed.
+    // const ext = fileName.split('.').pop().toLowerCase();
+    // ... (old logic was here)
+
     const formData = new FormData();
     formData.append("image_file", fileBuffer, {
         filename: fileName,
-        contentType: mimeType,
+        contentType: originalMimeType, // Use the captured original mimeType
     });
     formData.append("size", "auto");
 
@@ -62,6 +67,7 @@ export const config = {
 
         if (!response.ok) {
         const errorText = await response.text();
+        console.error(`Error from remove.bg API: ${response.status}`, errorText);
         return res.status(400).send(errorText);
         }
 
@@ -69,6 +75,7 @@ export const config = {
         res.setHeader("Content-Type", "image/png");
         res.send(buffer);
     } catch (err) {
-        res.status(500).send("Erro interno");
+        console.error("Internal server error:", err);
+        res.status(500).json({ error: "Erro interno do servidor.", details: err.message });
     }
 }
