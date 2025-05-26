@@ -1,9 +1,9 @@
 {
     "version": 2,
     "builds": [
-        { "src": "api/removebg.js", "use": "@vercel/node" }
+        { "src": "server/removebg.js", "use": "@vercel/node" }
     ],
     "routes": [
-        { "src": "/api/removebg", "dest": "api/removebg.js" }
+        { "src": "/server/removebg", "dest": "server/removebg.js" }
     ]
 }
