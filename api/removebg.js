@@ -66,11 +66,14 @@ export const config = {
 
     // Log what's being used for the API call
     console.log(`Preparing to send to remove.bg: filename='${fileName}', clientMimeType='${originalMimeType}', finalMimeTypeForAPI='${finalMimeType}', bufferLength=${fileBuffer.length}`);
+    // Log API key presence (masked)
+    console.log(`Using API Key: ${process.env.REMOVE_BG_KEY ? process.env.REMOVE_BG_KEY.substring(0, 4) + '...' : 'NOT SET'}`);
 
     const formData = new FormData();
     formData.append("image_file", fileBuffer, {
         filename: fileName,
         contentType: finalMimeType, // Use the refined MIME type
+        knownLength: fileBuffer.length // Add knownLength
     });
     formData.append("size", "auto");
 
