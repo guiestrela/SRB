@@ -1,0 +1,16 @@
+{
+    "version": 2,
+    "builds": [
+    {
+        "src": "server.js",
+        "dest": "server/removebg.js",
+        "framework": "node"
+    }
+    ],
+    "routes": [
+    {
+        "src": "/(.*)",
+        "dest": "server/removebg.js"
+    }
+    ]
+}
