@@ -36,7 +36,7 @@ export default async function handler(req, res) {
     }
 
     const formData = new FormData();
-    formData.append("image_file", file);
+    formData.append("image_file", fileBuffer, fileName); // Corrija aqui!
 
     try {
     const response = await fetch("https://api.remove.bg/v1.0/removebg", {
