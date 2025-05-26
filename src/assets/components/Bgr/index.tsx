@@ -31,9 +31,9 @@ function Bgr() {
 
     try {
         const response = await fetch("https://api-remove-bg-eight.vercel.app/api/removebg", {
-            method: "POST",
-            body: formData,
-        });
+        method: "POST",
+        body: formData,
+    });
 
         if (!response.ok) {
             const errorText = await response.text();
