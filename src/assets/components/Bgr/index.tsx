@@ -19,6 +19,7 @@ function Bgr() {
     const [result, setResult] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
+    const API_KEY = "68H8bJoimFogKoJ9667rcy9R"; // Coloque sua chave aqui
 
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,8 +38,11 @@ function Bgr() {
     formData.append("size", "auto");
 
     try {
-        const response = await fetch("/api/removebg", {
+        const response = await fetch("https://api.remove.bg/v1.0/removebg", {
             method: "POST",
+            headers: {
+                "X-Api-Key": API_KEY, // Coloque sua chave aqui
+            },
             body: formData,
         });
 
