@@ -65,16 +65,18 @@ export const config = {
     }
 
     // Log what's being used for the API call
-    console.log(`Preparing to send to remove.bg: filename='${fileName}', clientMimeType='${originalMimeType}', finalMimeTypeForAPI='${finalMimeType}', bufferLength=${fileBuffer.length}`);
+    console.log(`Preparing to send to remove.bg (Base64 strategy): filename='${fileName}', clientMimeType='${originalMimeType}', finalMimeTypeForAPI='${finalMimeType}', bufferLength=${fileBuffer.length}`);
     // Log API key presence (masked)
     console.log(`Using API Key: ${process.env.REMOVE_BG_KEY ? process.env.REMOVE_BG_KEY.substring(0, 4) + '...' : 'NOT SET'}`);
 
     const formData = new FormData();
-    formData.append("image_file", fileBuffer, {
-        filename: fileName,
-        contentType: finalMimeType, // Use the refined MIME type
-        knownLength: fileBuffer.length // Add knownLength
-    });
+
+    // Convert the file buffer to a Base64 string
+    const imageBase64 = fileBuffer.toString('base64');
+
+    // Append the Base64 string using the 'image_file_b64' parameter
+    formData.append("image_file_b64", imageBase64);
+
     formData.append("size", "auto");
 
     try {
