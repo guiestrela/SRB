@@ -30,9 +30,13 @@ export default async function handler(req, res) {
     req.pipe(busboy);
     });
 
+    // ADICIONE ESTA VERIFICAÇÃO:
+    if (!fileBuffer.length) {
+    return res.status(400).json({ error: "Nenhum arquivo recebido." });
+    }
+
     const formData = new FormData();
-    formData.append("image_file", fileBuffer, fileName);
-    formData.append("size", "auto");
+    formData.append("image_file", file);
 
     try {
     const response = await fetch("https://api.remove.bg/v1.0/removebg", {
