@@ -52,15 +52,20 @@ export default async function handler(req, res) {
         // These logs are very helpful for debugging, ensure they are checked.
         console.log("Attempting to remove background for fileName:", fileName);
         console.log("fileBuffer length for API call:", fileBuffer.length);
+        console.log("Is fileBuffer a Buffer object?", Buffer.isBuffer(fileBuffer)); // Sanity check
         // console.log("first bytes for API call:", fileBuffer.slice(0, 10)); // Optional: can be verbose
         console.log("Using REMOVE_BG_KEY:", process.env.REMOVE_BG_KEY ? "Exists" : "MISSING or undefined");
 
+        const apiCallHeaders = {
+            "X-Api-Key": process.env.REMOVE_BG_KEY,
+            ...formData.getHeaders(),
+        };
+        // Log the actual headers being sent to the remove.bg API
+        console.log("Headers being sent to remove.bg:", JSON.stringify(apiCallHeaders, null, 2));
+
         const response = await fetch("https://api.remove.bg/v1.0/removebg", {
         method: "POST",
-        headers: {
-            "X-Api-Key": process.env.REMOVE_BG_KEY,
-            ...formData.getHeaders(), // Re-add this line
-        },
+        headers: apiCallHeaders, // Use the constructed headers
         body: formData,
         });
 
