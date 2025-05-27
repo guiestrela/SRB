@@ -40,7 +40,8 @@ export default async function handler(req, res) {
     formData.append("image_file", fileBuffer, { filename: fileName, contentType: mimeType });
     formData.append("size", "auto");
 
-    try {        
+    try {
+        
         const response = await fetch("https://api.remove.bg/v1.0/removebg", {
         method: "POST",
         headers: {
@@ -49,8 +50,6 @@ export default async function handler(req, res) {
         },
         body: formData,
         });
-        console.log("REMOVE_BG_KEY:", process.env.REMOVE_BG_KEY);
-        console.log("fileBuffer length:", fileBuffer.length);
 
         if (!response.ok) {
         const errorText = await response.text();
