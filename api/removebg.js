@@ -41,7 +41,7 @@ export default async function handler(req, res) {
     else if (ext === "webp") mimeType = "image/webp";
 
     const formData = new FormData();
-    formData.append("image_file", file);
+    formData.append("image_file", fileBuffer, { filename: fileName, contentType: mimeType });
     formData.append("size", "auto");
 
     try {
