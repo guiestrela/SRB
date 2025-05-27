@@ -15,21 +15,13 @@ export default async function handler(req, res) {
     let fileName = "image.png";
 
     await new Promise((resolve, reject) => {
-        let fileEnded = false;
         busboy.on("file", (fieldname, file, info) => {
             fileName = info.filename || "image.png";
             file.on("data", (data) => {
                 fileBuffer = Buffer.concat([fileBuffer, data]);
             });
-            file.on("end", () => {
-                fileEnded = true;
-            });
         });
-        busboy.on("finish", () => {
-            // Só resolve se o arquivo terminou!
-            if (fileEnded) resolve();
-            else reject(new Error("Arquivo não finalizado"));
-        });
+        busboy.on("finish", resolve);
         busboy.on("error", reject);
         req.pipe(busboy);
     });
@@ -38,7 +30,9 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: "Nenhum arquivo recebido." });
     }
 
+    console.log("fileName:", fileName);
     console.log("fileBuffer length:", fileBuffer.length);
+    console.log("first bytes:", fileBuffer.slice(0, 10));
 
     const ext = fileName.split('.').pop().toLowerCase();
     let mimeType = "application/octet-stream";
@@ -47,7 +41,7 @@ export default async function handler(req, res) {
     else if (ext === "webp") mimeType = "image/webp";
 
     const formData = new FormData();
-    formData.append("image_file", fileBuffer, { filename: fileName, contentType: mimeType });
+    formData.append("image_file", file);
     formData.append("size", "auto");
 
     try {
