@@ -59,8 +59,7 @@ export default async function handler(req, res) {
         method: "POST",
         headers: {
             "X-Api-Key": process.env.REMOVE_BG_KEY,
-            // Let fetch set the Content-Type for FormData automatically.
-            // ...formData.getHeaders(), // This line is removed
+            ...formData.getHeaders(), // Re-add this line
         },
         body: formData,
         });
