@@ -41,7 +41,7 @@ export default async function handler(req, res) {
     formData.append("size", "auto");
 
     try {
-        
+        console.log("REMOVE_BG_KEY:", process.env.REMOVE_BG_KEY);
         const response = await fetch("https://api.remove.bg/v1.0/removebg", {
         method: "POST",
         headers: {
