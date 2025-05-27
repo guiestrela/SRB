@@ -20,8 +20,8 @@ export default async function handler(req, res) {
         file.on("data", (data) => {
             fileBuffer = Buffer.concat([fileBuffer, data]);
         });
+        file.on("end", resolve); // <-- resolve só quando o arquivo terminar!
         });
-        busboy.on("finish", resolve);
         busboy.on("error", reject);
         req.pipe(busboy);
     });
@@ -29,6 +29,8 @@ export default async function handler(req, res) {
     if (!fileBuffer.length) {
         return res.status(400).json({ error: "Nenhum arquivo recebido." });
     }
+
+    console.log("fileBuffer length:", fileBuffer.length);
 
     const ext = fileName.split('.').pop().toLowerCase();
     let mimeType = "application/octet-stream";
