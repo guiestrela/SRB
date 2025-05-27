@@ -20,8 +20,8 @@ export default async function handler(req, res) {
         file.on("data", (data) => {
             fileBuffer = Buffer.concat([fileBuffer, data]);
         });
-        file.on("end", resolve); // <-- resolve só quando o arquivo terminar!
         });
+        busboy.on("finish", resolve);
         busboy.on("error", reject);
         req.pipe(busboy);
     });
