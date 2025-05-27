@@ -16,12 +16,13 @@ export default async function handler(req, res) {
 
     await new Promise((resolve, reject) => {
         busboy.on("file", (fieldname, file, info) => {
-        fileName = info.filename || "image.png";
-        file.on("data", (data) => {
-            fileBuffer = Buffer.concat([fileBuffer, data]);
+            fileName = info.filename || "image.png";
+            file.on("data", (data) => {
+                fileBuffer = Buffer.concat([fileBuffer, data]);
+            });
+            // Remova o file.on("end", resolve);
         });
-        file.on("end", resolve); // <-- resolve só quando o arquivo terminar!
-        });
+        busboy.on("finish", resolve); // <-- resolve só quando TUDO terminou!
         busboy.on("error", reject);
         req.pipe(busboy);
     });
