@@ -50,6 +50,7 @@ export default async function handler(req, res) {
         body: formData,
         });
         console.log("REMOVE_BG_KEY:", process.env.REMOVE_BG_KEY);
+        console.log("fileBuffer length:", fileBuffer.length);
 
         if (!response.ok) {
         const errorText = await response.text();
