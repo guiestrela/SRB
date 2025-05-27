@@ -17,8 +17,16 @@ export default async function handler(req, res) {
     await new Promise((resolve, reject) => {
         busboy.on("file", (fieldname, file, info) => {
             fileName = info.filename || "image.png";
+            // It's good practice to clear or re-initialize fileBuffer if this handler
+            // could theoretically be called multiple times for a single request,
+            // though for 'image_file' we expect one.
+            // fileBuffer = Buffer.alloc(0); // Uncomment if needed for multiple file events logic.
             file.on("data", (data) => {
                 fileBuffer = Buffer.concat([fileBuffer, data]);
+            });
+            file.on("error", (err) => { // Handle errors on the file stream itself
+                console.error("File stream error:", err);
+                reject(err); // Reject the main promise
             });
         });
         busboy.on("finish", resolve);
@@ -29,10 +37,6 @@ export default async function handler(req, res) {
     if (!fileBuffer.length) {
         return res.status(400).json({ error: "Nenhum arquivo recebido." });
     }
-
-    console.log("fileName:", fileName);
-    console.log("fileBuffer length:", fileBuffer.length);
-    console.log("first bytes:", fileBuffer.slice(0, 10));
 
     const ext = fileName.split('.').pop().toLowerCase();
     let mimeType = "application/octet-stream";
@@ -45,25 +49,33 @@ export default async function handler(req, res) {
     formData.append("size", "auto");
 
     try {
-        console.log("REMOVE_BG_KEY:", process.env.REMOVE_BG_KEY);
+        // These logs are very helpful for debugging, ensure they are checked.
+        console.log("Attempting to remove background for fileName:", fileName);
+        console.log("fileBuffer length for API call:", fileBuffer.length);
+        // console.log("first bytes for API call:", fileBuffer.slice(0, 10)); // Optional: can be verbose
+        console.log("Using REMOVE_BG_KEY:", process.env.REMOVE_BG_KEY ? "Exists" : "MISSING or undefined");
+
         const response = await fetch("https://api.remove.bg/v1.0/removebg", {
         method: "POST",
         headers: {
             "X-Api-Key": process.env.REMOVE_BG_KEY,
-            ...formData.getHeaders(),
+            // Let fetch set the Content-Type for FormData automatically.
+            // ...formData.getHeaders(), // This line is removed
         },
         body: formData,
         });
 
         if (!response.ok) {
         const errorText = await response.text();
-        return res.status(400).send(errorText);
+        console.error(`Error from remove.bg API (${response.status}):`, errorText);
+        return res.status(response.status < 500 ? 400 : 502).json({ error: "Erro na API do remove.bg", details: errorText });
         }
 
         const buffer = Buffer.from(await response.arrayBuffer());
         res.setHeader("Content-Type", "image/png");
         res.send(buffer);
     } catch (err) {
-        res.status(500).send("Erro interno");
+        console.error("Erro interno no manipulador removebg:", err);
+        res.status(500).json({ error: "Erro interno do servidor", details: err.message });
     }
 }
