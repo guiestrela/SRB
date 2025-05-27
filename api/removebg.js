@@ -15,14 +15,21 @@ export default async function handler(req, res) {
     let fileName = "image.png";
 
     await new Promise((resolve, reject) => {
+        let fileEnded = false;
         busboy.on("file", (fieldname, file, info) => {
             fileName = info.filename || "image.png";
             file.on("data", (data) => {
                 fileBuffer = Buffer.concat([fileBuffer, data]);
             });
-            // Remova o file.on("end", resolve);
+            file.on("end", () => {
+                fileEnded = true;
+            });
         });
-        busboy.on("finish", resolve); // <-- resolve só quando TUDO terminou!
+        busboy.on("finish", () => {
+            // Só resolve se o arquivo terminou!
+            if (fileEnded) resolve();
+            else reject(new Error("Arquivo não finalizado"));
+        });
         busboy.on("error", reject);
         req.pipe(busboy);
     });
