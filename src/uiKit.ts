@@ -32,9 +32,6 @@ interface DivFlexType {
     borderbottom?: string
     borderleft?: string
 
-
-
-
     ///Mobile
     justifycontentmob?: string
     alignitemsmob?: string
@@ -186,8 +183,6 @@ interface ContainerButtonType {
     marginright?: string
     width?: string
 
-    //
-    
     //mobile
 
     justifycontentmob?: string
@@ -200,9 +195,7 @@ interface ContainerButtonType {
     marginrightmob?: string
     flexdirectionmob?: string
     gapmob?: string
-
 }
-
 
 interface ButtonType {
     border?: string
@@ -228,7 +221,6 @@ interface ButtonType {
     //
 
     hover?: string
-
 
     //mobile
 
