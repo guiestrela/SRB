@@ -64,12 +64,12 @@ describe('removeBgService', () => {
 
       // Mock fetch
       const mockBlob = new Blob(['image-data'], { type: 'image/png' });
-      global.fetch = vi.fn(() =>
+      vi.stubGlobal('fetch', vi.fn(() =>
         Promise.resolve({
           ok: true,
           blob: () => Promise.resolve(mockBlob),
         } as unknown as Response)
-      );
+      ));
 
       const result = await removeBgService.removeBackground(validFile);
 
@@ -83,9 +83,9 @@ describe('removeBgService', () => {
         { type: 'image/jpeg' }
       );
 
-      global.fetch = vi.fn(() =>
+      vi.stubGlobal('fetch', vi.fn(() =>
         Promise.reject(new Error('Network error'))
-      );
+      ));
 
       const result = await removeBgService.removeBackground(validFile);
 
@@ -100,13 +100,13 @@ describe('removeBgService', () => {
         { type: 'image/jpeg' }
       );
 
-      global.fetch = vi.fn(() =>
+      vi.stubGlobal('fetch', vi.fn(() =>
         Promise.resolve({
           ok: false,
           status: 403,
           text: () => Promise.resolve('Unauthorized'),
         } as unknown as Response)
-      );
+      ));
 
       const result = await removeBgService.removeBackground(validFile);
 

@@ -2,71 +2,49 @@ import styled from "styled-components";
 
 interface InputType {
     border?: string
-    borderradius?: string
+    borderRadius?: string
     padding?: string
     backgroundColor?: string
-    fontfamily?: string
-    fontsize?: string
+    fontFamily?: string
+    fontSize?: string
     color?: string
     width?: string
     height?: string
-    maxwidth?: string
-    margintop?: string
-    justifycontent?: string
-    alignitems?: string
-    fontweight?: string
-    marginbotton?: string
-    marginleft?: string
-    marginright?: string
-    gap?: string
-    textalign?: string
-
-    //
-
+    maxWidth?: string
+    marginTop?: string
+    fontWeight?: string
+    marginBottom?: string
+    marginLeft?: string
+    marginRight?: string
+    textAlign?: string
     hover?: string
-
-
-    //mobile
-
-    widthmob?: string
-    heightmob?: string
-    justifycontentmob?: string
-    alignitemsmob?: string
-    fontsizemob?: string
+    fontSizeMob?: string
 }
 
-export const Input = styled.button<InputType>`
-    display: flex;
-    justify-content: ${props => props.justifycontent ? props.justifycontent : ""};
-    align-items: ${props => props.alignitems ? props.alignitems : ""};    
+export const Input = styled.input<InputType>`
     border: ${props => props.border ? props.border : ""};
-    border-radius: ${props => props.borderradius ? props.borderradius : ""};
+    border-radius: ${props => props.borderRadius ? props.borderRadius : ""};
     padding: ${props => props.padding ? props.padding : ""};
-    width: ${props => props.width ? props.width : ""};
+    width: ${props => props.width ? props.width : "100%"};
     height: ${props => props.height ? props.height : ""};
-    max-width: ${props => props.maxwidth ? props.maxwidth : ""};
-    margin-top: ${props => props.margintop ? props.margintop : ""};
+    max-width: ${props => props.maxWidth ? props.maxWidth : ""};
+    margin-top: ${props => props.marginTop ? props.marginTop : ""};
     background-color: ${props => props.backgroundColor ? props.backgroundColor : ""};
-    font-family: ${props => props.fontfamily ? props.fontfamily : ""};
-    font-size: ${props => props.fontsize ? props.fontsize : ""};
-    font-weight: ${props => props.fontweight ? props.fontweight : ""};
+    font-family: ${props => props.fontFamily ? props.fontFamily : ""};
+    font-size: ${props => props.fontSize ? props.fontSize : ""};
+    font-weight: ${props => props.fontWeight ? props.fontWeight : ""};
     color: ${props => props.color ? props.color : ""};
-    margin-left: ${props => props.marginleft ? props.marginleft : ""};
-    margin-right: ${props => props.marginright ? props.marginright : ""};
-    margin-bottom: ${props => props.marginbotton ? props.marginbotton : ""};
-    gap: ${props => props.gap ? props.gap : ""};
-    text-align: ${props => props.textalign ? props.textalign : ""};
-    cursor: pointer;    
+    margin-left: ${props => props.marginLeft ? props.marginLeft : ""};
+    margin-right: ${props => props.marginRight ? props.marginRight : ""};
+    margin-bottom: ${props => props.marginBottom ? props.marginBottom : ""};
+    text-align: ${props => props.textAlign ? props.textAlign : ""};
+    cursor: pointer;
 
     &:hover {
         background-color: ${props => props.hover ? props.hover : ""};
     }
 
     @media only screen and (max-width: 580px) {
-        width: ${props => props.widthmob ? props.widthmob : ""};        
-        height: ${props => props.heightmob ? props.heightmob : ""};
-        justify-content: ${props => props.justifycontentmob ? props.justifycontentmob : ""};
-        align-items: ${props => props.alignitemsmob ? props.alignitemsmob : ""};
-        font-size: ${props => props.fontsizemob ? props.fontsizemob : ""};
+        font-size: ${props => props.fontSizeMob ? props.fontSizeMob : ""};
     }
 `;

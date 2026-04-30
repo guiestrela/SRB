@@ -41,8 +41,8 @@ function Bgr() {
             const objectUrl = removeBgService.createObjectUrl(response.blob);
             setResult(objectUrl);
         } else {
-            setError(response.message);
-            alert(`Erro ao remover fundo: ${response.message}`);
+            const errorMessage = 'message' in response ? response.message : 'Erro desconhecido';
+            alert(`Erro ao remover fundo: ${errorMessage}`);
         }
 
         setLoading(false);
@@ -116,11 +116,8 @@ function Bgr() {
                             {!loading && !result && (
                             <label htmlFor="upload-input" style={{ width: "100%" }}>
                                 <Input
-                                    as="input"
                                     id="upload-input"
                                     padding="10px"
-                                    alignItems="center"
-                                    justifyContent="center"
                                     border="2px solid #716FFA"
                                     backgroundColor="#716FFA"
                                     hover="#716ffa9d"
