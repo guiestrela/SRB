@@ -23,3 +23,17 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Environment variables - NUNCA comitir
+.env
+.env.local
+.env.*.local
+
+# API Keys e Secrets
+*.key
+*.pem
+secrets/
+
+# Testing
+coverage/
+.nyc_output/

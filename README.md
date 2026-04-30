@@ -23,6 +23,73 @@ Este projeto foi desenvolvido com as seguintes tecnologias, demonstrando meu con
 * **TypeScript:** Aplicação de tipagem estática para garantir a segurança do código, melhorar a manutenibilidade e demonstrar familiaridade com os conceitos avançados do TypeScript, como interfaces, tipos genéricos e enums.
 * **Styled Components:** Implementação de estilização diretamente nos componentes React, demonstrando a capacidade de criar estilos encapsulados, reutilizáveis e com boa organização, aproveitando as vantagens do CSS-in-JS.
 * **Vite:** Utilização de uma ferramenta de build moderna e rápida para o desenvolvimento e otimização do projeto, mostrando familiaridade com workflows de desenvolvimento frontend atuais.
+* **Vitest:** Framework de testes rápido para validação de componentes, serviços e configurações.
+* **Testing Library:** Testes focados no comportamento do usuário com React.
+
+## 🔒 Segurança e Boas Práticas
+
+Este projeto implementa boas práticas de segurança:
+
+* **Proteção de API Keys:** Variáveis de ambiente separadas em `.env` (não versionadas)
+* **Arquitetura de Serviços:** Lógica de API encapsulada em camada de serviço
+* **Validação de Entrada:** Validações rigorosas de arquivos (tipo, tamanho)
+* **Tratamento de Erros:** Mensagens de erro amigáveis e logging apropriado
+* **Limpeza de Recursos:** Gerenciamento adequado de URLs de blob
+
+### Configuração de Ambiente
+
+1. Copie `.env.example` para `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Configure sua API key do RemoveBg:
+   ```bash
+   VITE_REMOVEBG_API_KEY=sua_chave_aqui
+   VITE_REMOVEBG_API_URL=https://api.remove.bg/v1.0/removebg
+   ```
+
+**Importante:** Nunca commite o arquivo `.env` com suas credenciais!
+
+## 🧪 Testes
+
+O projeto inclui uma suite completa de testes automatizados:
+
+```bash
+# Rodar todos os testes
+npm run test
+
+# Modo watch (reexecuta ao salvar)
+npm run test -- --watch
+
+# Interface visual
+npm run test:ui
+
+# Cobertura de testes
+npm run test:coverage
+```
+
+Para mais detalhes sobre os testes, veja [TESTING.md](./TESTING.md)
+
+### Cobertura de Testes
+- ✅ Serviços de API
+- ✅ Componentes React
+- ✅ Configuração de Ambiente
+- ✅ Validação de Entrada
+
+## 📋 Refatorações Recentes
+
+### uiKit2 Migration
+- ✅ Migração de componentes de `uiKit` para `uiKit2`
+- ✅ Padronização de nomenclatura (camelCase)
+- ✅ Correção de tipos TypeScript
+- ✅ Melhoria de consistência do código
+
+### Arquitetura de Serviços
+- ✅ Criação de `removeBgService` centralizado
+- ✅ Separação de responsabilidades
+- ✅ Facilita testes e manutenção
+- ✅ Reutilização de lógica
 
 ## 💻 Executando o Projeto Localmente (Para Avaliação)
 
@@ -40,7 +107,12 @@ https://srb-psi.vercel.app/
     ```bash
     npm install # ou yarn install ou pnpm install
     ```
-3.  **Inicie o servidor de desenvolvimento:**
+3.  **Configure variáveis de ambiente:**
+    ```bash
+    cp .env.example .env
+    # Edite .env e adicione sua chave do RemoveBg API
+    ```
+4.  **Inicie o servidor de desenvolvimento:**
     ```bash
     npm run dev # ou yarn dev ou pnpm dev
     ```

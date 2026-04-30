@@ -2,36 +2,36 @@ import {
     DivContainerText, 
     DivFlex, 
     Texto } 
-    from "../../../uiKit";
+    from "../../../uiKit2";
 
 function TextInfo() {
     return(
         <>
             <DivFlex 
                 width="100%" 
-                justifycontent="center"               
-                alignitems="center"
+                justifyContent="center"               
+                alignItems="center"
                 >
                 <DivFlex 
                     width="1440px"  
                     paddingTotal="10px 0px"
                     backgroundColor="#c9c6f0"
-                    flexdirectionmob="column"
-                    alignitemsmob="center"
-                    justifycontentmob="center"
-                    bordertop="2px solid #FFFFFF">
+                    flexDirectionMob="column"
+                    alignItemsMob="center"
+                    justifyContentMob="center"
+                    borderTop="2px solid #FFFFFF">
 
                     <DivContainerText 
                         widthTotal="100%" 
-                        alignitems="center" 
-                        justifycontent="center" 
-                        paddingleft="20px"
-                        justifycontentmob="center">
+                        alignItems="center" 
+                        justifyContent="center" 
+                        paddingLeft="20px"
+                        justifyContentMob="center">
                         <Texto 
-                            fontsize="20px"     
-                            fontweight="500" 
-                            textalign="center"
-                            textalignmob="center">
+                            fontSize="20px"     
+                            fontWeight="500" 
+                            textAlign="center"
+                            textAlignMob="center">
                             @2025 - Projeto em desenvolvimento
                         </Texto>
                     </DivContainerText>

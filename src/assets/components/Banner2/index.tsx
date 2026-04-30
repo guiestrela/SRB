@@ -1,4 +1,4 @@
-import { DivContainerText, DivFlex, DivFlexImage, Img, Title } from "../../../uiKit";
+import { DivContainerText, DivFlex, DivFlexImage, Img, Title } from "../../../uiKit2";
 
 import image2 from "../../images/image 2.png"
 
@@ -7,39 +7,39 @@ function Banner2() {
         <>
             <DivFlex 
                 width="100%" 
-                justifycontent="center" 
-                alignitems="center">
+                justifyContent="center" 
+                alignItems="center">
                 <DivFlex 
                     width="1440px" 
-                    justifycontent="center" 
-                    alignitems="center"
-                    flexdirection="row"
+                    justifyContent="center" 
+                    alignItems="center"
+                    flexDirection="row"
                     gap="100px"
-                    paddingbottom="80px"
-                    flexdirectionmob="column"
-                    paddingTotalmob="20px"
-                    gapmob="20px">                                
+                    paddingBottom="80px"
+                    flexDirectionMob="column"
+                    paddingTotalMob="20px"
+                    gapMob="20px">                                
                     <DivContainerText 
-                        widthmob="100%" 
-                        alignitems="center" 
-                        justifycontent="center"
-                        flexdirection="column" 
+                        widthMob="100%" 
+                        alignItems="center" 
+                        justifyContent="center"
+                        flexDirection="column" 
                         gap="20px"      
-                        paddingleft="80px"                  
-                        paddingTotalmob="0px 20px">
+                        paddingLeft="80px"                  
+                        paddingTotalMob="0px 20px">
                         <Title 
-                            fontsize="38px" 
-                            fontweight="bold" 
-                            textalign="center"
-                            textalignmob="center">
+                            fontSize="38px" 
+                            fontWeight="bold" 
+                            textAlign="center"
+                            textAlignMob="center">
                             Remova o Background em apenas um click.
                         </Title>         
                     </DivContainerText>
                     <DivFlexImage 
-                    justifycontent="center" 
-                    alignitems="center"
-                    paddingright="80px"
-                    paddingTotalmob="0px">
+                    justifyContent="center" 
+                    alignItems="center"
+                    paddingRight="80px"
+                    paddingTotalMob="0px">
                         <Img src={image2}/>
                     </DivFlexImage>
                 </DivFlex>

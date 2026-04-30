@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
     Button, 
     ContainerButton, 
@@ -8,102 +8,92 @@ import {
     Img, 
     Link, 
     Title }
-    from "../../../uiKit";
+    from "../../../uiKit2";
     
 import mainBannerImage from "../../images/main_banner 1.png";
 import camera from "../../icons/camera.svg";
-import { Input } from "./style"; // Make sure Input is a styled.input, not styled.button
+import { Input } from "./style";
+import { removeBgService } from "../../../services/removeBgService";
 
 function Bgr() {
     const [result, setResult] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
 
-    const API_KEY = "68H8bJoimFogKoJ9667rcy9R"; // Coloque sua chave do remove.bg aqui
+    // Limpar URL de objeto quando componente desmontar
+    useEffect(() => {
+        return () => {
+            if (result) {
+                removeBgService.revokeObjectUrl(result);
+            }
+        };
+    }, [result]);
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (file.size > 4 * 1024 * 1024) {
-        alert("A imagem deve ter no máximo 4 MB.");
-        return;
-    }
+        const file = e.target.files?.[0];
+        if (!file) return;
 
-    setLoading(true);
-    setResult(null);
+        setLoading(true);
+        setResult(null);
 
-    const formData = new FormData();
-    formData.append("image_file", file);
-    formData.append("size", "auto");
+        const response = await removeBgService.removeBackground(file);
 
-    try {
-        const response = await fetch("https://api.remove.bg/v1.0/removebg", {
-            method: "POST",
-            headers: {
-                "X-Api-Key": API_KEY,
-            },
-            body: formData,
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error("Erro na API: " + errorText);
+        if ('success' in response && response.success) {
+            const objectUrl = removeBgService.createObjectUrl(response.blob);
+            setResult(objectUrl);
+        } else {
+            setError(response.message);
+            alert(`Erro ao remover fundo: ${response.message}`);
         }
 
-        const blob = await response.blob();
-        setResult(URL.createObjectURL(blob));
-    } catch (error) {
-        alert(`Erro ao remover fundo: ${error instanceof Error ? error.message : error}`);
-    } finally {
         setLoading(false);
-    }
     };
     return (
         <>
             <DivFlex 
                     width="100%" 
-                    justifycontent="center" 
-                    alignitems="center">
+                    justifyContent="center" 
+                    alignItems="center">
                 <DivFlex 
                     width="1440px" 
                     paddingTotal="80px 80px" 
-                    justifycontent="center" 
-                    alignitems="center" 
+                    justifyContent="center" 
+                    alignItems="center" 
                     gap="100px" 
-                    flexdirectionmob="column"
-                    paddingTotalmob="40px 20px"
-                    gapmob="60px">                    
+                    flexDirectionMob="column"
+                    paddingTotalMob="40px 20px"
+                    gapMob="60px">                    
                     <DivFlexImage 
-                        justifycontent="center" 
-                        alignitems="center"
-                        paddingTotalmob="0px 20px">
+                        justifyContent="center" 
+                        alignItems="center"
+                        paddingTotalMob="0px 20px">
                         <Img src={mainBannerImage} />
                     </DivFlexImage>
                     <DivFlex 
                         width="499px" 
                         height="100%" 
-                        justifycontent="center" 
-                        alignitems="center" 
-                        flexdirection="column" 
+                        justifyContent="center" 
+                        alignItems="center" 
+                        flexDirection="column" 
                         border="dashed 2px black">
                         <DivFlexImage 
-                            justifycontent="center" 
-                            alignitems="center" 
+                            justifyContent="center" 
+                            alignItems="center" 
                             widthTotal="73px" 
-                            paddingtop="26px" 
-                            widthmob="70px">
+                            paddingTop="26px" 
+                            widthMob="70px">
                             <Img src={camera} />
                         </DivFlexImage>                        
                         <DivContainerText 
                             widthTotal="100%" 
-                            alignitems="center" 
-                            justifycontent="center" 
-                            paddingleft="20px" 
-                            paddingtop="20px">
+                            alignItems="center" 
+                            justifyContent="center" 
+                            paddingLeft="20px" 
+                            paddingTop="20px">
                             <Title 
-                                fontsize="20px" 
-                                fontweight="400" 
-                                textalign="center" 
-                                textalignmob="center">
+                                fontSize="20px" 
+                                fontWeight="400" 
+                                textAlign="center" 
+                                textAlignMob="center">
                                 {!result ? (
                                     <>
                                         <span style={{ color: "#716FFA", fontWeight: "bold" }}>Upload </span>
@@ -117,27 +107,27 @@ function Bgr() {
                             </Title>
                         </DivContainerText>
                         <ContainerButton 
-                            justifycontent="center" 
-                            alignitems="center"
-                            paddingtop={!result ? "80px" : "20px"}                             
-                            flexdirection="column" 
+                            justifyContent="center" 
+                            alignItems="center"
+                            paddingTop={!result ? "80px" : "20px"}                             
+                            flexDirection="column" 
                             gap="20px"
-                            paddingbottom="26px">                          
+                            paddingBottom="26px">                          
                             {!loading && !result && (
                             <label htmlFor="upload-input" style={{ width: "100%" }}>
                                 <Input
                                     as="input"
                                     id="upload-input"
                                     padding="10px"
-                                    alignitems="center"
-                                    justifycontent="center"
+                                    alignItems="center"
+                                    justifyContent="center"
                                     border="2px solid #716FFA"
                                     backgroundColor="#716FFA"
                                     hover="#716ffa9d"
-                                    borderradius="15px"
-                                    textalign="center"
-                                    fontsize="20px"
-                                    fontsizemob="10px"
+                                    borderRadius="15px"
+                                    textAlign="center"
+                                    fontSize="20px"
+                                    fontSizeMob="10px"
                                     type="file"
                                     accept="image/*"
                                     onChange={handleFileChange}
@@ -149,34 +139,34 @@ function Bgr() {
                             {result && (
                                 <DivFlex 
                                     width="100%" 
-                                    justifycontent="center" 
-                                    alignitems="center" 
-                                    flexdirection="column">
+                                    justifyContent="center" 
+                                    alignItems="center" 
+                                    flexDirection="column">
                                     <DivFlexImage 
-                                        justifycontent="center" 
-                                        alignitems="center" 
+                                        justifyContent="center" 
+                                        alignItems="center" 
                                         widthTotal= "300px"
-                                        widthmob="180px"
+                                        widthMob="180px"
                                         >
                                         <Img src={result} alt="Sem fundo" />       
                                     </DivFlexImage>                                                                 
                                     <Link href={result} download="imagem-sem-fundo.png">
                                         <ContainerButton 
-                                            justifycontent="center" 
-                                            alignitems="center" 
-                                            paddingtop="20px" 
-                                            flexdirection="column" 
+                                            justifyContent="center" 
+                                            alignItems="center" 
+                                            paddingTop="20px" 
+                                            flexDirection="column" 
                                             gap="20px">
                                             <Button 
                                                 disabled={loading} 
-                                                padding="10px" alignitems="center" justifycontent="center" 
+                                                padding="10px" alignItems="center" justifyContent="center" 
                                                 border="2px solid #716FFA"
                                                 backgroundColor="#716FFA"
                                                 hover="#716ffa9d"
-                                                borderradius="15px" textalign="center"
-                                                fontsize="20px"
+                                                borderRadius="15px" textAlign="center"
+                                                fontSize="20px"
                                                 color="#FFFFFF"
-                                                fontweight="bold">
+                                                fontWeight="bold">
                                                     Baixar imagem
                                             </Button>
                                         </ContainerButton>
